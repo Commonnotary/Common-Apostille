@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Notary Apostille | Instant Quote & Intake</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="30" r="28" stroke="#D4AF37" stroke-width="2"/>
+                        <path d="M30 10L32 25H45L34 33L38 48L30 40L22 48L26 33L15 25H28L30 10Z" fill="#D4AF37"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">Common Notary</span>
+                    <span class="logo-sub">Apostille Services</span>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="#services">Services</a>
+                <a href="#quote">Get Quote</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Professional Apostille & Notary Services</h1>
+            <p>Fast, reliable document authentication for domestic and international use</p>
+            <a href="#quote" class="btn btn-primary">Get Instant Quote</a>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <path d="M9 15l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h3>Apostille Facilitation</h3>
+                    <p>Authentication of documents for international use in Hague Convention countries</p>
+                    <span class="price-tag">Starting at $297</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Power of Attorney</h3>
+                    <p>Professional notarization for POA documents with mobile services available</p>
+                    <span class="price-tag">$115 - $150</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h3>Trust Notarization</h3>
+                    <p>Secure notarization services for trust documents and estate planning</p>
+                    <span class="price-tag">$125 - $175</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </div>
+                    <h3>Loan Signing</h3>
+                    <p>Certified loan signing agent services for real estate transactions</p>
+                    <span class="price-tag">Starting at $80</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quote" class="quote-section">
+        <div class="container">
+            <h2>Get Your Instant Quote</h2>
+            <p class="section-subtitle">Complete the form below for an estimated price and to start your request</p>
+
+            <div class="form-container">
+                <form id="intakeForm" class="intake-form">
+                    <!-- Step 1: Service Selection -->
+                    <div class="form-step active" data-step="1">
+                        <div class="step-header">
+                            <span class="step-number">1</span>
+                            <h3>Select Your Service</h3>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="serviceType">Service Type <span class="required">*</span></label>
+                            <select id="serviceType" name="serviceType" required>
+                                <option value="">Choose a service...</option>
+                                <option value="apostille">Apostille Facilitation</option>
+                                <option value="poa">Power of Attorney Notarization</option>
+                                <option value="trust">Trust Notarization</option>
+                                <option value="loan">Loan Signing</option>
+                                <option value="hospital">Hospital/Nursing Home Notarization</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="regionGroup" style="display: none;">
+                            <label for="region">Region <span class="required">*</span></label>
+                            <select id="region" name="region">
+                                <option value="">Select region...</option>
+                                <option value="nj">New Jersey - $447</option>
+                                <option value="dmv">DMV Area (DC/MD/VA) - $397</option>
+                                <option value="tn">Tennessee - $347</option>
+                                <option value="swva">Roanoke/SWVA - $297</option>
+                                <option value="federal">Federal Apostille - $497</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="locationTypeGroup" style="display: none;">
+                            <label for="locationType">Location Type</label>
+                            <select id="locationType" name="locationType">
+                                <option value="office">Office Visit</option>
+                                <option value="mobile">Mobile Service</option>
+                                <option value="hospital">Hospital/Nursing Home (+$25)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numDocuments">Number of Documents <span class="required">*</span></label>
+                            <input type="number" id="numDocuments" name="numDocuments" min="1" max="50" value="1" required>
+                            <span class="help-text">Additional documents may qualify for volume discounts</span>
+                        </div>
+
+                        <button type="button" class="btn btn-primary btn-next" data-next="2">Continue</button>
+                    </div>
+
+                    <!-- Step 2: Urgency & Delivery -->
+                    <div class="form-step" data-step="2">
+                        <div class="step-header">
+                            <span class="step-number">2</span>
+                            <h3>Urgency & Delivery</h3>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="urgency">Processing Speed <span class="required">*</span></label>
+                            <div class="radio-cards">
+                                <label class="radio-card">
+                                    <input type="radio" name="urgency" value="standard" checked>
+                                    <div class="radio-card-content">
+                                        <span class="radio-title">Standard</span>
+                                        <span class="radio-desc">5-7 business days</span>
+                                        <span class="radio-price">No additional fee</span>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="urgency" value="expedited">
+                                    <div class="radio-card-content">
+                                        <span class="radio-title">Expedited</span>
+                                        <span class="radio-desc">2-3 business days</span>
+                                        <span class="radio-price">+$75</span>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="urgency" value="rush">
+                                    <div class="radio-card-content">
+                                        <span class="radio-title">Rush</span>
+                                        <span class="radio-desc">24-48 hours</span>
+                                        <span class="radio-price">+$150</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="delivery">Delivery Method <span class="required">*</span></label>
+                            <div class="radio-cards">
+                                <label class="radio-card">
+                                    <input type="radio" name="delivery" value="pickup" checked>
+                                    <div class="radio-card-content">
+                                        <span class="radio-title">Local Pickup</span>
+                                        <span class="radio-desc">Pick up at our office</span>
+                                        <span class="radio-price">Free</span>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="delivery" value="standard_mail">
+                                    <div class="radio-card-content">
+                                        <span class="radio-title">Standard Mail</span>
+                                        <span class="radio-desc">USPS Priority Mail</span>
+                                        <span class="radio-price">+$15</span>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="delivery" value="express">
+                                    <div class="radio-card-content">
+                                        <span class="radio-title">Express Shipping</span>
+                                        <span class="radio-desc">FedEx/UPS Overnight</span>
+                                        <span class="radio-price">+$35</span>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="delivery" value="international">
+                                    <div class="radio-card-content">
+                                        <span class="radio-title">International</span>
+                                        <span class="radio-desc">DHL/FedEx International</span>
+                                        <span class="radio-price">+$75</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary btn-prev" data-prev="1">Back</button>
+                            <button type="button" class="btn btn-primary btn-next" data-next="3">Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Quote Display -->
+                    <div class="form-step" data-step="3">
+                        <div class="step-header">
+                            <span class="step-number">3</span>
+                            <h3>Your Estimated Quote</h3>
+                        </div>
+
+                        <div class="quote-display">
+                            <div class="quote-breakdown">
+                                <div class="quote-line" id="baseServiceLine">
+                                    <span class="quote-label">Base Service</span>
+                                    <span class="quote-value">$0.00</span>
+                                </div>
+                                <div class="quote-line" id="documentsLine">
+                                    <span class="quote-label">Documents (1)</span>
+                                    <span class="quote-value">Included</span>
+                                </div>
+                                <div class="quote-line" id="urgencyLine" style="display: none;">
+                                    <span class="quote-label">Expedited Processing</span>
+                                    <span class="quote-value">$0.00</span>
+                                </div>
+                                <div class="quote-line" id="deliveryLine" style="display: none;">
+                                    <span class="quote-label">Delivery</span>
+                                    <span class="quote-value">$0.00</span>
+                                </div>
+                                <div class="quote-line" id="locationLine" style="display: none;">
+                                    <span class="quote-label">Location Fee</span>
+                                    <span class="quote-value">$0.00</span>
+                                </div>
+                                <div class="quote-total">
+                                    <span class="quote-label">Estimated Total</span>
+                                    <span class="quote-value" id="totalPrice">$0.00</span>
+                                </div>
+                            </div>
+                            <p class="quote-disclaimer">*Final price may vary based on document complexity and specific requirements</p>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary btn-prev" data-prev="2">Back</button>
+                            <button type="button" class="btn btn-primary btn-next" data-next="4">Proceed to Contact Info</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Contact Information -->
+                    <div class="form-step" data-step="4">
+                        <div class="step-header">
+                            <span class="step-number">4</span>
+                            <h3>Contact Information</h3>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="preferredContact">Preferred Contact Method</label>
+                            <select id="preferredContact" name="preferredContact">
+                                <option value="email">Email</option>
+                                <option value="phone">Phone Call</option>
+                                <option value="text">Text Message</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notes">Additional Notes</label>
+                            <textarea id="notes" name="notes" rows="3" placeholder="Any special requirements or questions..."></textarea>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary btn-prev" data-prev="3">Back</button>
+                            <button type="button" class="btn btn-primary btn-next" data-next="5">Continue to Upload</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Document Upload -->
+                    <div class="form-step" data-step="5">
+                        <div class="step-header">
+                            <span class="step-number">5</span>
+                            <h3>Upload Documents</h3>
+                        </div>
+
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="17 8 12 3 7 8"/>
+                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                            </div>
+                            <p class="upload-text">Drag & drop files here or click to browse</p>
+                            <p class="upload-hint">Accepted formats: PDF, JPG, PNG (Max 10MB per file)</p>
+                            <input type="file" id="fileUpload" name="documents" multiple accept=".pdf,.jpg,.jpeg,.png" hidden>
+                        </div>
+
+                        <div class="uploaded-files" id="uploadedFiles"></div>
+
+                        <div class="info-box">
+                            <h4>Document Tips</h4>
+                            <ul>
+                                <li>Ensure all pages are clearly visible and legible</li>
+                                <li>Include all pages of multi-page documents</li>
+                                <li>Original documents may be required for apostille services</li>
+                            </ul>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary btn-prev" data-prev="4">Back</button>
+                            <button type="submit" class="btn btn-primary">Submit Request</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Confirmation Screen -->
+                <div class="confirmation-screen" id="confirmationScreen" style="display: none;">
+                    <div class="confirmation-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h2>Request Submitted Successfully!</h2>
+                    <div class="case-id-display">
+                        <span class="case-label">Your Case ID</span>
+                        <span class="case-number" id="caseNumber">CNA-000000</span>
+                        <button class="copy-btn" id="copyBtn" title="Copy to clipboard">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="confirmation-message">Please save your Case ID for future reference. We will contact you within 1 business day.</p>
+
+                    <div class="next-steps">
+                        <h3>Next Steps</h3>
+                        <div class="steps-list">
+                            <div class="step-item">
+                                <span class="step-num">1</span>
+                                <div class="step-content">
+                                    <strong>Confirmation Email</strong>
+                                    <p>Check your inbox for a confirmation email with your quote details</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-num">2</span>
+                                <div class="step-content">
+                                    <strong>Document Review</strong>
+                                    <p>Our team will review your documents and contact you within 1 business day</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-num">3</span>
+                                <div class="step-content">
+                                    <strong>Payment & Processing</strong>
+                                    <p>Once approved, you'll receive a secure payment link to begin processing</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="id-requirements">
+                        <h3>ID Requirements</h3>
+                        <div class="requirements-content">
+                            <p>For notarization services, please have the following ready:</p>
+                            <ul>
+                                <li><strong>Primary ID:</strong> Valid government-issued photo ID (Driver's License, Passport, or State ID)</li>
+                                <li><strong>Secondary ID (if required):</strong> Credit card with signature, utility bill, or another form of ID</li>
+                                <li><strong>For Apostille:</strong> Original documents or certified copies from the issuing authority</li>
+                            </ul>
+                            <div class="id-note">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="16" x2="12" y2="12"/>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                </svg>
+                                <span>All IDs must be current and unexpired at the time of notarization</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="location.reload()">Submit Another Request</button>
+                </div>
+
+                <!-- Progress Indicator -->
+                <div class="progress-indicator" id="progressIndicator">
+                    <div class="progress-step active" data-step="1">
+                        <span class="progress-dot"></span>
+                        <span class="progress-label">Service</span>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <span class="progress-dot"></span>
+                        <span class="progress-label">Delivery</span>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <span class="progress-dot"></span>
+                        <span class="progress-label">Quote</span>
+                    </div>
+                    <div class="progress-step" data-step="4">
+                        <span class="progress-dot"></span>
+                        <span class="progress-label">Contact</span>
+                    </div>
+                    <div class="progress-step" data-step="5">
+                        <span class="progress-dot"></span>
+                        <span class="progress-label">Upload</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                    </div>
+                    <h3>Phone</h3>
+                    <p>(555) 123-4567</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <h3>Email</h3>
+                    <p>info@commonnotary.com</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3>Hours</h3>
+                    <p>Mon-Fri: 9AM - 6PM<br>Sat: 10AM - 2PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-main">Common Notary Apostille</span>
+                    <p>Professional document authentication services</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#services">Services</a>
+                    <a href="#quote">Get Quote</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Common Notary Apostille. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
