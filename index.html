@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Notary Apostille - CRM Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>Common Notary Apostille</h1>
+                <span class="tagline">Case Management System</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" onclick="openModal('add')">
+                    <span class="icon">+</span> New Case
+                </button>
+            </div>
+        </header>
+
+        <!-- Status Pipeline -->
+        <section class="pipeline-section">
+            <h2>Status Pipeline</h2>
+            <div class="pipeline">
+                <div class="pipeline-stage" data-status="Received">
+                    <div class="stage-header">
+                        <span class="stage-name">Received</span>
+                        <span class="stage-count" id="count-received">0</span>
+                    </div>
+                </div>
+                <div class="pipeline-stage" data-status="Reviewed">
+                    <div class="stage-header">
+                        <span class="stage-name">Reviewed</span>
+                        <span class="stage-count" id="count-reviewed">0</span>
+                    </div>
+                </div>
+                <div class="pipeline-stage" data-status="Payment Collected">
+                    <div class="stage-header">
+                        <span class="stage-name">Payment Collected</span>
+                        <span class="stage-count" id="count-payment-collected">0</span>
+                    </div>
+                </div>
+                <div class="pipeline-stage" data-status="In Process">
+                    <div class="stage-header">
+                        <span class="stage-name">In Process</span>
+                        <span class="stage-count" id="count-in-process">0</span>
+                    </div>
+                </div>
+                <div class="pipeline-stage" data-status="Shipped/Walk-in">
+                    <div class="stage-header">
+                        <span class="stage-name">Shipped/Walk-in</span>
+                        <span class="stage-count" id="count-shipped-walk-in">0</span>
+                    </div>
+                </div>
+                <div class="pipeline-stage" data-status="Returned">
+                    <div class="stage-header">
+                        <span class="stage-name">Returned</span>
+                        <span class="stage-count" id="count-returned">0</span>
+                    </div>
+                </div>
+                <div class="pipeline-stage" data-status="Delivered">
+                    <div class="stage-header">
+                        <span class="stage-name">Delivered</span>
+                        <span class="stage-count" id="count-delivered">0</span>
+                    </div>
+                </div>
+                <div class="pipeline-stage" data-status="Closed">
+                    <div class="stage-header">
+                        <span class="stage-name">Closed</span>
+                        <span class="stage-count" id="count-closed">0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters and Search -->
+        <section class="filters-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search cases by client, document type, or tracking..." onkeyup="filterCases()">
+            </div>
+            <div class="filter-controls">
+                <select id="statusFilter" onchange="filterCases()">
+                    <option value="">All Statuses</option>
+                    <option value="Received">Received</option>
+                    <option value="Reviewed">Reviewed</option>
+                    <option value="Payment Collected">Payment Collected</option>
+                    <option value="In Process">In Process</option>
+                    <option value="Shipped/Walk-in">Shipped/Walk-in</option>
+                    <option value="Returned">Returned</option>
+                    <option value="Delivered">Delivered</option>
+                    <option value="Closed">Closed</option>
+                </select>
+                <select id="regionFilter" onchange="filterCases()">
+                    <option value="">All Regions</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Cases Table -->
+        <section class="cases-section">
+            <table class="cases-table">
+                <thead>
+                    <tr>
+                        <th>Case ID</th>
+                        <th>Client Name</th>
+                        <th>Document Type</th>
+                        <th>Region</th>
+                        <th>Status</th>
+                        <th>Due Date</th>
+                        <th>Price</th>
+                        <th>Tracking #</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="casesTableBody">
+                    <!-- Cases will be populated here -->
+                </tbody>
+            </table>
+            <div class="empty-state" id="emptyState">
+                <p>No cases found. Click "New Case" to add your first case.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Add/Edit Case Modal -->
+    <div class="modal" id="caseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Case</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="caseForm" onsubmit="saveCase(event)">
+                <input type="hidden" id="caseId">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="clientName">Client Name *</label>
+                        <input type="text" id="clientName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientEmail">Client Email</label>
+                        <input type="email" id="clientEmail">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="clientPhone">Client Phone</label>
+                        <input type="tel" id="clientPhone">
+                    </div>
+                    <div class="form-group">
+                        <label for="documentType">Document Type *</label>
+                        <select id="documentType" required>
+                            <option value="">Select Document Type</option>
+                            <option value="Birth Certificate">Birth Certificate</option>
+                            <option value="Marriage Certificate">Marriage Certificate</option>
+                            <option value="Death Certificate">Death Certificate</option>
+                            <option value="Divorce Decree">Divorce Decree</option>
+                            <option value="Power of Attorney">Power of Attorney</option>
+                            <option value="Diploma/Transcript">Diploma/Transcript</option>
+                            <option value="Corporate Documents">Corporate Documents</option>
+                            <option value="Court Documents">Court Documents</option>
+                            <option value="FBI Background Check">FBI Background Check</option>
+                            <option value="Affidavit">Affidavit</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="region">Destination Region *</label>
+                        <select id="region" required>
+                            <option value="">Select Region</option>
+                            <option value="Hague Countries">Hague Countries (Apostille)</option>
+                            <option value="Non-Hague Countries">Non-Hague Countries (Embassy)</option>
+                            <option value="China">China</option>
+                            <option value="India">India</option>
+                            <option value="Mexico">Mexico</option>
+                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="UAE">UAE</option>
+                            <option value="South Korea">South Korea</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status *</label>
+                        <select id="status" required>
+                            <option value="Received">Received</option>
+                            <option value="Reviewed">Reviewed</option>
+                            <option value="Payment Collected">Payment Collected</option>
+                            <option value="In Process">In Process</option>
+                            <option value="Shipped/Walk-in">Shipped/Walk-in</option>
+                            <option value="Returned">Returned</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dueDate">Due Date</label>
+                        <input type="date" id="dueDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price ($)</label>
+                        <input type="number" id="price" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="trackingNumber">Tracking Number</label>
+                        <input type="text" id="trackingNumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="returnTrackingNumber">Return Tracking Number</label>
+                        <input type="text" id="returnTrackingNumber">
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" rows="3"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Case</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Case Modal -->
+    <div class="modal" id="viewModal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Case Details</h2>
+                <button class="close-btn" onclick="closeViewModal()">&times;</button>
+            </div>
+            <div id="caseDetails">
+                <!-- Case details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Client Update Modal -->
+    <div class="modal" id="updateModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Send Client Update</h2>
+                <button class="close-btn" onclick="closeUpdateModal()">&times;</button>
+            </div>
+            <div class="update-content">
+                <div class="update-tabs">
+                    <button class="tab-btn active" onclick="switchUpdateTab('email')">Email</button>
+                    <button class="tab-btn" onclick="switchUpdateTab('text')">Text Message</button>
+                </div>
+                <div class="update-preview" id="updatePreview">
+                    <!-- Update message will be populated here -->
+                </div>
+                <div class="update-actions">
+                    <button class="btn btn-secondary" onclick="copyToClipboard()">
+                        <span class="icon">&#128203;</span> Copy to Clipboard
+                    </button>
+                    <button class="btn btn-primary" onclick="openEmailClient()" id="sendEmailBtn">
+                        <span class="icon">&#9993;</span> Open Email Client
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
