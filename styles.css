@@ -484,6 +484,97 @@ select option {
     color: var(--gold-primary);
 }
 
+/* Checkbox Cards */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.checkbox-card {
+    cursor: pointer;
+}
+
+.checkbox-card input {
+    display: none;
+}
+
+.checkbox-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 12px;
+    background: var(--black-lighter);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: all 0.3s ease;
+    min-height: 90px;
+    justify-content: center;
+}
+
+.checkbox-card input:checked + .checkbox-card-content {
+    border-color: var(--gold-primary);
+    background: rgba(212, 175, 55, 0.15);
+    box-shadow: 0 0 0 1px var(--gold-primary);
+}
+
+.checkbox-card:hover .checkbox-card-content {
+    border-color: var(--gold-primary);
+}
+
+.checkbox-title {
+    font-weight: 600;
+    color: var(--white);
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.checkbox-desc {
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    margin-bottom: 4px;
+}
+
+.checkbox-price {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gold-primary);
+}
+
+/* Section Labels */
+.section-label {
+    display: block;
+    font-weight: 600;
+    color: var(--gold-primary);
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Featured Service Card */
+.service-card.featured {
+    border-color: var(--gold-primary);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, var(--black-card) 100%);
+    position: relative;
+}
+
+.service-card.featured::before {
+    content: 'NEW';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--gold-gradient);
+    color: var(--black-primary);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    letter-spacing: 1px;
+}
+
 /* Quote Display */
 .quote-display {
     background: var(--black-lighter);

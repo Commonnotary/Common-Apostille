@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Pricing Configuration
     const PRICING = {
+        // Apostille Services
         apostille: {
             nj: 447,
             dmv: 397,
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             swva: 297,
             federal: 497
         },
+        // Notarization Services
         poa: {
             base: 115,
             max: 150,
@@ -28,23 +30,64 @@ document.addEventListener('DOMContentLoaded', function() {
             base: 100,
             perDoc: 25
         },
+        // Remote Proceedings
+        remote: {
+            base: 649, // Up to 4 hours included
+            overagePerHour: 150,
+            overagePerHalfHour: 75
+        },
+        // Digital Recording Add-ons
+        recording: {
+            audio: 149,
+            audio_video: 199,
+            timestamp: 49, // Free with audio_video
+            same_day_delivery: 75,
+            '24hr_delivery': 45,
+            archive_monthly: 25,
+            archive_yearly: 99
+        },
+        // Complexity/Exhibit Upsells
+        complexity: {
+            heavy_exhibits: 99,
+            multi_party: 75,
+            interpreter: 75,
+            second_tech: 199
+        },
+        // Remote Booking Urgency
+        remoteUrgency: {
+            rush_booking: 125,
+            same_day_booking: 199,
+            after_hours: 150,
+            weekend_holiday: 199
+        },
+        // Certified Reporter
+        certified_reporter: {
+            coordination: 125
+        },
+        // Recording Only (standalone)
+        recording_only: {
+            base: 0 // Just the add-ons
+        },
+        // Standard urgency (notary/apostille)
         urgency: {
             standard: 0,
             expedited: 75,
             rush: 150
         },
+        // Delivery methods
         delivery: {
             pickup: 0,
             standard_mail: 15,
             express: 35,
             international: 75
         },
+        // Location fees
         location: {
             office: 0,
             mobile: 25,
             hospital: 25
         },
-        additionalDocDiscount: 0.15 // 15% discount for additional documents
+        additionalDocDiscount: 0.15
     };
 
     // DOM Elements
@@ -61,6 +104,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const locationTypeGroup = document.getElementById('locationTypeGroup');
     const locationTypeSelect = document.getElementById('locationType');
     const numDocumentsInput = document.getElementById('numDocuments');
+    const numDocumentsGroup = document.getElementById('numDocumentsGroup');
+
+    // Remote session elements
+    const sessionHoursGroup = document.getElementById('sessionHoursGroup');
+    const sessionHoursSelect = document.getElementById('sessionHours');
+    const recordingAddonsGroup = document.getElementById('recordingAddonsGroup');
+    const recordingDeliveryGroup = document.getElementById('recordingDeliveryGroup');
+    const complexityGroup = document.getElementById('complexityGroup');
+    const certifiedReporterGroup = document.getElementById('certifiedReporterGroup');
+
+    // Urgency groups
+    const standardUrgencyGroup = document.getElementById('standardUrgencyGroup');
+    const remoteUrgencyGroup = document.getElementById('remoteUrgencyGroup');
+    const deliveryGroup = document.getElementById('deliveryGroup');
 
     // Upload elements
     const uploadArea = document.getElementById('uploadArea');
@@ -70,7 +127,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Quote display elements
     const baseServiceLine = document.getElementById('baseServiceLine');
     const documentsLine = document.getElementById('documentsLine');
+    const sessionOverageLine = document.getElementById('sessionOverageLine');
+    const recordingLine = document.getElementById('recordingLine');
+    const complexityLine = document.getElementById('complexityLine');
     const urgencyLine = document.getElementById('urgencyLine');
+    const bookingUrgencyLine = document.getElementById('bookingUrgencyLine');
     const deliveryLine = document.getElementById('deliveryLine');
     const locationLine = document.getElementById('locationLine');
     const totalPriceEl = document.getElementById('totalPrice');
@@ -91,6 +152,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Number of documents change handler
         numDocumentsInput.addEventListener('change', calculateQuote);
 
+        // Session hours change handler
+        if (sessionHoursSelect) {
+            sessionHoursSelect.addEventListener('change', calculateQuote);
+        }
+
         // Radio button change handlers
         document.querySelectorAll('input[name="urgency"]').forEach(radio => {
             radio.addEventListener('change', calculateQuote);
@@ -98,6 +164,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.querySelectorAll('input[name="delivery"]').forEach(radio => {
             radio.addEventListener('change', calculateQuote);
+        });
+
+        // Checkbox change handlers for add-ons
+        document.querySelectorAll('input[name="addons"]').forEach(checkbox => {
+            checkbox.addEventListener('change', handleAddonChange);
+        });
+
+        // Remote urgency checkbox handlers
+        document.querySelectorAll('input[name="remoteUrgency"]').forEach(checkbox => {
+            checkbox.addEventListener('change', calculateQuote);
         });
 
         // Region change handler
@@ -136,26 +212,93 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('phone').addEventListener('input', formatPhoneNumber);
     }
 
+    function handleAddonChange(e) {
+        const checkbox = e.target;
+        const value = checkbox.value;
+
+        // Handle mutually exclusive options
+        if (value === 'audio' && checkbox.checked) {
+            // Uncheck audio_video if audio is selected
+            const audioVideo = document.querySelector('input[name="addons"][value="audio_video"]');
+            if (audioVideo) audioVideo.checked = false;
+        } else if (value === 'audio_video' && checkbox.checked) {
+            // Uncheck audio if audio_video is selected
+            const audio = document.querySelector('input[name="addons"][value="audio"]');
+            if (audio) audio.checked = false;
+        }
+
+        // Handle delivery options - only one can be selected
+        if ((value === 'same_day_delivery' || value === '24hr_delivery') && checkbox.checked) {
+            const otherDelivery = value === 'same_day_delivery' ? '24hr_delivery' : 'same_day_delivery';
+            const otherCheckbox = document.querySelector(`input[name="addons"][value="${otherDelivery}"]`);
+            if (otherCheckbox) otherCheckbox.checked = false;
+        }
+
+        // Handle archive options - only one can be selected
+        if ((value === 'archive_monthly' || value === 'archive_yearly') && checkbox.checked) {
+            const otherArchive = value === 'archive_monthly' ? 'archive_yearly' : 'archive_monthly';
+            const otherCheckbox = document.querySelector(`input[name="addons"][value="${otherArchive}"]`);
+            if (otherCheckbox) otherCheckbox.checked = false;
+        }
+
+        calculateQuote();
+    }
+
     function handleServiceTypeChange() {
         const serviceType = serviceTypeSelect.value;
+        const isRemoteService = ['remote', 'recording_only', 'certified_reporter'].includes(serviceType);
 
-        // Show/hide region selector for apostille
-        if (serviceType === 'apostille') {
-            regionGroup.style.display = 'block';
-            regionSelect.required = true;
-            locationTypeGroup.style.display = 'none';
-        } else if (serviceType === 'poa' || serviceType === 'trust' || serviceType === 'loan') {
-            regionGroup.style.display = 'none';
-            regionSelect.required = false;
-            locationTypeGroup.style.display = 'block';
-        } else if (serviceType === 'hospital') {
-            regionGroup.style.display = 'none';
-            regionSelect.required = false;
-            locationTypeGroup.style.display = 'none';
-        } else {
-            regionGroup.style.display = 'none';
-            regionSelect.required = false;
-            locationTypeGroup.style.display = 'none';
+        // Reset all conditional groups
+        regionGroup.style.display = 'none';
+        regionSelect.required = false;
+        locationTypeGroup.style.display = 'none';
+        sessionHoursGroup.style.display = 'none';
+        recordingAddonsGroup.style.display = 'none';
+        recordingDeliveryGroup.style.display = 'none';
+        complexityGroup.style.display = 'none';
+        certifiedReporterGroup.style.display = 'none';
+        numDocumentsGroup.style.display = 'block';
+
+        // Toggle urgency display
+        if (standardUrgencyGroup) standardUrgencyGroup.style.display = isRemoteService ? 'none' : 'block';
+        if (remoteUrgencyGroup) remoteUrgencyGroup.style.display = isRemoteService ? 'block' : 'none';
+        if (deliveryGroup) deliveryGroup.style.display = isRemoteService ? 'none' : 'block';
+
+        // Show/hide based on service type
+        switch (serviceType) {
+            case 'apostille':
+                regionGroup.style.display = 'block';
+                regionSelect.required = true;
+                break;
+
+            case 'poa':
+            case 'trust':
+            case 'loan':
+                locationTypeGroup.style.display = 'block';
+                break;
+
+            case 'hospital':
+                // No additional options needed
+                break;
+
+            case 'remote':
+                sessionHoursGroup.style.display = 'block';
+                recordingAddonsGroup.style.display = 'block';
+                recordingDeliveryGroup.style.display = 'block';
+                complexityGroup.style.display = 'block';
+                numDocumentsGroup.style.display = 'none';
+                break;
+
+            case 'recording_only':
+                recordingAddonsGroup.style.display = 'block';
+                recordingDeliveryGroup.style.display = 'block';
+                numDocumentsGroup.style.display = 'none';
+                break;
+
+            case 'certified_reporter':
+                certifiedReporterGroup.style.display = 'block';
+                numDocumentsGroup.style.display = 'none';
+                break;
         }
 
         calculateQuote();
@@ -168,76 +311,180 @@ document.addEventListener('DOMContentLoaded', function() {
         const urgency = document.querySelector('input[name="urgency"]:checked')?.value || 'standard';
         const delivery = document.querySelector('input[name="delivery"]:checked')?.value || 'pickup';
         const locationType = locationTypeSelect.value;
+        const sessionHours = parseInt(sessionHoursSelect?.value) || 4;
 
-        let basePrice = 0;
-        let additionalDocsPrice = 0;
-        let urgencyPrice = PRICING.urgency[urgency] || 0;
-        let deliveryPrice = PRICING.delivery[delivery] || 0;
-        let locationPrice = 0;
-        let serviceName = '';
+        let quote = {
+            serviceName: '',
+            basePrice: 0,
+            numDocs: numDocs,
+            additionalDocsPrice: 0,
+            sessionOveragePrice: 0,
+            recordingPrice: 0,
+            complexityPrice: 0,
+            urgencyPrice: 0,
+            bookingUrgencyPrice: 0,
+            deliveryPrice: 0,
+            locationPrice: 0,
+            urgency: urgency,
+            delivery: delivery,
+            locationType: locationType,
+            isRemoteService: false
+        };
 
         // Calculate base price based on service type
         switch (serviceType) {
             case 'apostille':
                 if (region && PRICING.apostille[region]) {
-                    basePrice = PRICING.apostille[region];
-                    // Additional documents for apostille
+                    quote.basePrice = PRICING.apostille[region];
                     if (numDocs > 1) {
-                        additionalDocsPrice = (numDocs - 1) * (basePrice * (1 - PRICING.additionalDocDiscount));
+                        quote.additionalDocsPrice = (numDocs - 1) * (quote.basePrice * (1 - PRICING.additionalDocDiscount));
                     }
                 }
-                serviceName = region ? `${getRegionName(region)} Apostille` : 'Apostille';
+                quote.serviceName = region ? `${getRegionName(region)} Apostille` : 'Apostille';
+                quote.urgencyPrice = PRICING.urgency[urgency] || 0;
+                quote.deliveryPrice = PRICING.delivery[delivery] || 0;
                 break;
 
             case 'poa':
-                basePrice = PRICING.poa.base;
+                quote.basePrice = PRICING.poa.base;
                 if (numDocs > 1) {
-                    additionalDocsPrice = (numDocs - 1) * PRICING.poa.perDoc;
+                    quote.additionalDocsPrice = (numDocs - 1) * PRICING.poa.perDoc;
                 }
-                locationPrice = PRICING.location[locationType] || 0;
-                serviceName = 'Power of Attorney';
+                quote.locationPrice = PRICING.location[locationType] || 0;
+                quote.serviceName = 'Power of Attorney';
+                quote.urgencyPrice = PRICING.urgency[urgency] || 0;
+                quote.deliveryPrice = PRICING.delivery[delivery] || 0;
                 break;
 
             case 'trust':
-                basePrice = PRICING.trust.base;
+                quote.basePrice = PRICING.trust.base;
                 if (numDocs > 1) {
-                    additionalDocsPrice = (numDocs - 1) * PRICING.trust.perDoc;
+                    quote.additionalDocsPrice = (numDocs - 1) * PRICING.trust.perDoc;
                 }
-                locationPrice = PRICING.location[locationType] || 0;
-                serviceName = 'Trust Notarization';
+                quote.locationPrice = PRICING.location[locationType] || 0;
+                quote.serviceName = 'Trust Notarization';
+                quote.urgencyPrice = PRICING.urgency[urgency] || 0;
+                quote.deliveryPrice = PRICING.delivery[delivery] || 0;
                 break;
 
             case 'loan':
-                basePrice = PRICING.loan.base;
+                quote.basePrice = PRICING.loan.base;
                 if (numDocs > 1) {
-                    additionalDocsPrice = (numDocs - 1) * PRICING.loan.perDoc;
+                    quote.additionalDocsPrice = (numDocs - 1) * PRICING.loan.perDoc;
                 }
-                locationPrice = PRICING.location[locationType] || 0;
-                serviceName = 'Loan Signing';
+                quote.locationPrice = PRICING.location[locationType] || 0;
+                quote.serviceName = 'Loan Signing';
+                quote.urgencyPrice = PRICING.urgency[urgency] || 0;
+                quote.deliveryPrice = PRICING.delivery[delivery] || 0;
                 break;
 
             case 'hospital':
-                basePrice = PRICING.hospital.base;
+                quote.basePrice = PRICING.hospital.base;
                 if (numDocs > 1) {
-                    additionalDocsPrice = (numDocs - 1) * PRICING.hospital.perDoc;
+                    quote.additionalDocsPrice = (numDocs - 1) * PRICING.hospital.perDoc;
                 }
-                serviceName = 'Hospital/Nursing Home Notarization';
+                quote.serviceName = 'Hospital/Nursing Home Notarization';
+                quote.urgencyPrice = PRICING.urgency[urgency] || 0;
+                quote.deliveryPrice = PRICING.delivery[delivery] || 0;
+                break;
+
+            case 'remote':
+                quote.basePrice = PRICING.remote.base;
+                quote.serviceName = 'Remote Deposition Support';
+                quote.isRemoteService = true;
+
+                // Calculate session overage
+                if (sessionHours > 4) {
+                    quote.sessionOveragePrice = (sessionHours - 4) * PRICING.remote.overagePerHour;
+                }
+
+                // Calculate recording add-ons
+                quote.recordingPrice = calculateRecordingAddons();
+
+                // Calculate complexity add-ons
+                quote.complexityPrice = calculateComplexityAddons();
+
+                // Calculate booking urgency
+                quote.bookingUrgencyPrice = calculateRemoteUrgency();
+                break;
+
+            case 'recording_only':
+                quote.basePrice = 0;
+                quote.serviceName = 'Digital Recording (Add-on)';
+                quote.isRemoteService = true;
+                quote.recordingPrice = calculateRecordingAddons();
+                quote.bookingUrgencyPrice = calculateRemoteUrgency();
+                break;
+
+            case 'certified_reporter':
+                quote.basePrice = PRICING.certified_reporter.coordination;
+                quote.serviceName = 'Certified Reporter Coordination';
+                quote.isRemoteService = true;
+                quote.bookingUrgencyPrice = calculateRemoteUrgency();
                 break;
         }
 
-        // Update quote display
-        updateQuoteDisplay({
-            serviceName,
-            basePrice,
-            numDocs,
-            additionalDocsPrice,
-            urgency,
-            urgencyPrice,
-            delivery,
-            deliveryPrice,
-            locationType,
-            locationPrice
+        updateQuoteDisplay(quote);
+    }
+
+    function calculateRecordingAddons() {
+        let total = 0;
+        const selectedAddons = document.querySelectorAll('input[name="addons"]:checked');
+        const hasAudioVideo = Array.from(selectedAddons).some(cb => cb.value === 'audio_video');
+
+        selectedAddons.forEach(addon => {
+            const value = addon.value;
+
+            // Recording options
+            if (value === 'audio') {
+                total += PRICING.recording.audio;
+            } else if (value === 'audio_video') {
+                total += PRICING.recording.audio_video;
+            } else if (value === 'timestamp') {
+                // Free with audio_video
+                if (!hasAudioVideo) {
+                    total += PRICING.recording.timestamp;
+                }
+            } else if (value === 'same_day_delivery') {
+                total += PRICING.recording.same_day_delivery;
+            } else if (value === '24hr_delivery') {
+                total += PRICING.recording['24hr_delivery'];
+            } else if (value === 'archive_monthly') {
+                total += PRICING.recording.archive_monthly;
+            } else if (value === 'archive_yearly') {
+                total += PRICING.recording.archive_yearly;
+            }
         });
+
+        return total;
+    }
+
+    function calculateComplexityAddons() {
+        let total = 0;
+        const selectedAddons = document.querySelectorAll('input[name="addons"]:checked');
+
+        selectedAddons.forEach(addon => {
+            const value = addon.value;
+            if (PRICING.complexity[value]) {
+                total += PRICING.complexity[value];
+            }
+        });
+
+        return total;
+    }
+
+    function calculateRemoteUrgency() {
+        let total = 0;
+        const selectedUrgency = document.querySelectorAll('input[name="remoteUrgency"]:checked');
+
+        selectedUrgency.forEach(urgency => {
+            const value = urgency.value;
+            if (PRICING.remoteUrgency[value]) {
+                total += PRICING.remoteUrgency[value];
+            }
+        });
+
+        return total;
     }
 
     function getRegionName(region) {
@@ -256,16 +503,48 @@ document.addEventListener('DOMContentLoaded', function() {
         baseServiceLine.querySelector('.quote-label').textContent = quote.serviceName || 'Base Service';
         baseServiceLine.querySelector('.quote-value').textContent = formatCurrency(quote.basePrice);
 
-        // Documents line
-        if (quote.numDocs > 1) {
-            documentsLine.querySelector('.quote-label').textContent = `Additional Documents (${quote.numDocs - 1})`;
-            documentsLine.querySelector('.quote-value').textContent = formatCurrency(quote.additionalDocsPrice);
+        // Documents line (hide for remote services)
+        if (quote.isRemoteService) {
+            documentsLine.style.display = 'none';
         } else {
-            documentsLine.querySelector('.quote-label').textContent = 'Documents (1)';
-            documentsLine.querySelector('.quote-value').textContent = 'Included';
+            documentsLine.style.display = 'flex';
+            if (quote.numDocs > 1) {
+                documentsLine.querySelector('.quote-label').textContent = `Additional Documents (${quote.numDocs - 1})`;
+                documentsLine.querySelector('.quote-value').textContent = formatCurrency(quote.additionalDocsPrice);
+            } else {
+                documentsLine.querySelector('.quote-label').textContent = 'Documents (1)';
+                documentsLine.querySelector('.quote-value').textContent = 'Included';
+            }
         }
 
-        // Urgency line
+        // Session overage line
+        if (quote.sessionOveragePrice > 0) {
+            sessionOverageLine.style.display = 'flex';
+            sessionOverageLine.querySelector('.quote-label').textContent = 'Session Overage';
+            sessionOverageLine.querySelector('.quote-value').textContent = formatCurrency(quote.sessionOveragePrice);
+        } else {
+            sessionOverageLine.style.display = 'none';
+        }
+
+        // Recording add-ons line
+        if (quote.recordingPrice > 0) {
+            recordingLine.style.display = 'flex';
+            recordingLine.querySelector('.quote-label').textContent = 'Recording Add-ons';
+            recordingLine.querySelector('.quote-value').textContent = formatCurrency(quote.recordingPrice);
+        } else {
+            recordingLine.style.display = 'none';
+        }
+
+        // Complexity add-ons line
+        if (quote.complexityPrice > 0) {
+            complexityLine.style.display = 'flex';
+            complexityLine.querySelector('.quote-label').textContent = 'Complexity Add-ons';
+            complexityLine.querySelector('.quote-value').textContent = formatCurrency(quote.complexityPrice);
+        } else {
+            complexityLine.style.display = 'none';
+        }
+
+        // Standard urgency line
         if (quote.urgencyPrice > 0) {
             urgencyLine.style.display = 'flex';
             urgencyLine.querySelector('.quote-label').textContent =
@@ -273,6 +552,15 @@ document.addEventListener('DOMContentLoaded', function() {
             urgencyLine.querySelector('.quote-value').textContent = formatCurrency(quote.urgencyPrice);
         } else {
             urgencyLine.style.display = 'none';
+        }
+
+        // Booking urgency line (for remote services)
+        if (quote.bookingUrgencyPrice > 0) {
+            bookingUrgencyLine.style.display = 'flex';
+            bookingUrgencyLine.querySelector('.quote-label').textContent = 'Booking/Timing Fees';
+            bookingUrgencyLine.querySelector('.quote-value').textContent = formatCurrency(quote.bookingUrgencyPrice);
+        } else {
+            bookingUrgencyLine.style.display = 'none';
         }
 
         // Delivery line
@@ -303,8 +591,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Total
-        const total = quote.basePrice + quote.additionalDocsPrice + quote.urgencyPrice +
-                      quote.deliveryPrice + quote.locationPrice;
+        const total = quote.basePrice + quote.additionalDocsPrice + quote.sessionOveragePrice +
+                      quote.recordingPrice + quote.complexityPrice + quote.urgencyPrice +
+                      quote.bookingUrgencyPrice + quote.deliveryPrice + quote.locationPrice;
         totalPriceEl.textContent = formatCurrency(total);
     }
 
@@ -352,6 +641,9 @@ document.addEventListener('DOMContentLoaded', function() {
         let isValid = true;
 
         requiredFields.forEach(field => {
+            // Skip hidden fields
+            if (field.offsetParent === null) return;
+
             if (!field.value) {
                 isValid = false;
                 field.classList.add('error');
@@ -516,11 +808,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function collectFormData() {
+        // Collect selected add-ons
+        const selectedAddons = Array.from(document.querySelectorAll('input[name="addons"]:checked'))
+            .map(cb => cb.value);
+
+        // Collect remote urgency options
+        const remoteUrgencyOptions = Array.from(document.querySelectorAll('input[name="remoteUrgency"]:checked'))
+            .map(cb => cb.value);
+
         return {
             serviceType: serviceTypeSelect.value,
             region: regionSelect.value,
             locationType: locationTypeSelect.value,
             numDocuments: numDocumentsInput.value,
+            sessionHours: sessionHoursSelect?.value || null,
+            addons: selectedAddons,
+            remoteUrgency: remoteUrgencyOptions,
             urgency: document.querySelector('input[name="urgency"]:checked')?.value,
             delivery: document.querySelector('input[name="delivery"]:checked')?.value,
             firstName: document.getElementById('firstName').value,
