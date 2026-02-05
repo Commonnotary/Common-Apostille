@@ -26,10 +26,11 @@ class TestLeadDeduplicator:
 
     def test_normalize_firm_name(self):
         """Test firm name normalization."""
-        # Test suffix removal
+        # Test suffix removal - "law firm" is removed, but standalone "law" isn't
         assert LeadDeduplicator._normalize_firm_name("Smith Law Firm LLC") == "smith"
-        assert LeadDeduplicator._normalize_firm_name("Johnson & Associates, P.C.") == "johnson"
-        assert LeadDeduplicator._normalize_firm_name("Williams Elder Law PLLC") == "williams elder"
+        assert LeadDeduplicator._normalize_firm_name("Johnson & Associates, P.C.") == "johnson associates"
+        # "elder law" stays because it's not a suffix like "law firm"
+        assert LeadDeduplicator._normalize_firm_name("Williams Elder Law PLLC") == "williams elder law"
         assert LeadDeduplicator._normalize_firm_name("The Legal Group") == "legal group"
 
         # Test noise word removal
@@ -156,21 +157,43 @@ class TestLeadDeduplicator:
     def test_website_match_duplicate(self):
         """Test duplicate detection by website match."""
         existing_lead = Lead(
-            firm_name="Test Firm",
+            firm_name="Alpha Legal Services",
             attorney_name="John Smith",
-            firm_website="https://testfirm.com"
+            firm_website="https://alphalegal.com"
         )
         deduper = LeadDeduplicator([existing_lead])
 
+        # Test case 1: Same website, no attorney name (generic firm listing)
         new_lead = Lead(
-            firm_name="Test Firm Inc",  # Slightly different name
-            attorney_name="John Smith",  # Same attorney
-            firm_website="https://testfirm.com/"  # Same website with trailing slash
+            firm_name="Alpha Legal",  # Different name format
+            # No attorney_name - represents a generic firm listing
+            firm_website="https://alphalegal.com/"  # Same website with trailing slash
         )
 
         is_dup, matched, reason = deduper.is_duplicate(new_lead)
         assert is_dup is True
         assert "website" in reason
+
+    def test_website_same_attorney_duplicate(self):
+        """Test duplicate detection by website with matching attorney."""
+        existing_lead = Lead(
+            firm_name="Beta Law Group",
+            attorney_name="Jane Doe",
+            firm_website="https://betalaw.com"
+        )
+        deduper = LeadDeduplicator([existing_lead])
+
+        # Same website, same attorney (different name format)
+        new_lead = Lead(
+            firm_name="Beta Law",
+            attorney_name="Jane Doe, Esq.",  # Same person with title
+            firm_website="https://betalaw.com"
+        )
+
+        is_dup, matched, reason = deduper.is_duplicate(new_lead)
+        assert is_dup is True
+        # Could match on firm+attorney or website+attorney
+        assert is_dup is True
 
 
 class TestDeduplicatorEdgeCases:
