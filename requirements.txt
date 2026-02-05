@@ -1,0 +1,50 @@
+# Code Review Bot Dependencies
+# ============================
+
+# Code Analysis
+pylint>=3.0.0
+flake8>=7.0.0
+black>=24.0.0
+isort>=5.13.0
+mypy>=1.8.0
+bandit>=1.7.0
+radon>=6.0.0
+vulture>=2.10
+
+# Web Analysis
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+selenium>=4.17.0
+lighthouse-python>=0.1.0
+aiohttp>=3.9.0
+httpx>=0.26.0
+
+# AI/ML for Self-Improvement
+openai>=1.12.0
+anthropic>=0.18.0
+scikit-learn>=1.4.0
+numpy>=1.26.0
+pandas>=2.2.0
+
+# Testing
+pytest>=8.0.0
+pytest-cov>=4.1.0
+pytest-asyncio>=0.23.0
+
+# Utilities
+python-dotenv>=1.0.0
+pyyaml>=6.0.0
+rich>=13.7.0
+click>=8.1.0
+jinja2>=3.1.0
+gitpython>=3.1.0
+pydantic>=2.6.0
+
+# Reporting
+markdown>=3.5.0
+html2text>=2024.2.0
+weasyprint>=61.0
+
+# Performance & Security
+safety>=2.3.0
+pip-audit>=2.7.0

@@ -1,0 +1,196 @@
+name: Code Review Bot
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  code-review:
+    name: Automated Code Review
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Run Code Analysis
+        id: analysis
+        run: |
+          # Run code analysis
+          python -m bot.cli code analyze . --output analysis-report.json --format json
+
+          # Capture score
+          SCORE=$(python -c "import json; print(json.load(open('analysis-report.json'))['summary']['quality_score'])")
+          echo "score=$SCORE" >> $GITHUB_OUTPUT
+
+          # Set status
+          if [ $(echo "$SCORE < 70" | bc -l) -eq 1 ]; then
+            echo "status=failure" >> $GITHUB_OUTPUT
+          elif [ $(echo "$SCORE < 85" | bc -l) -eq 1 ]; then
+            echo "status=warning" >> $GITHUB_OUTPUT
+          else
+            echo "status=success" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true
+
+      - name: Run Code Metrics
+        run: |
+          python -m bot.cli code metrics . > metrics-report.txt
+        continue-on-error: true
+
+      - name: Generate Recommendations
+        run: |
+          python -m bot.cli recommend generate . > recommendations.txt
+        continue-on-error: true
+
+      - name: Post Review Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            // Read reports
+            let analysisReport = {};
+            try {
+              analysisReport = JSON.parse(fs.readFileSync('analysis-report.json', 'utf8'));
+            } catch (e) {
+              console.log('Could not read analysis report');
+            }
+
+            let metricsReport = '';
+            try {
+              metricsReport = fs.readFileSync('metrics-report.txt', 'utf8');
+            } catch (e) {
+              console.log('Could not read metrics report');
+            }
+
+            let recommendations = '';
+            try {
+              recommendations = fs.readFileSync('recommendations.txt', 'utf8');
+            } catch (e) {
+              console.log('Could not read recommendations');
+            }
+
+            const score = analysisReport?.summary?.quality_score || 'N/A';
+            const criticalCount = analysisReport?.summary?.critical_count || 0;
+            const highCount = analysisReport?.summary?.high_count || 0;
+
+            let statusEmoji = '✅';
+            if (criticalCount > 0) statusEmoji = '🔴';
+            else if (highCount > 0) statusEmoji = '🟡';
+
+            const comment = `## ${statusEmoji} Code Review Bot Report
+
+            ### Quality Score: ${score}/100
+
+            | Severity | Count |
+            |----------|-------|
+            | Critical | ${criticalCount} |
+            | High | ${highCount} |
+            | Medium | ${analysisReport?.summary?.medium_count || 0} |
+            | Low | ${analysisReport?.summary?.low_count || 0} |
+
+            <details>
+            <summary>📊 Code Metrics</summary>
+
+            \`\`\`
+            ${metricsReport.slice(0, 2000)}
+            \`\`\`
+            </details>
+
+            <details>
+            <summary>💡 Recommendations</summary>
+
+            \`\`\`
+            ${recommendations.slice(0, 2000)}
+            \`\`\`
+            </details>
+
+            ---
+            *Common Apostille Code Review Bot*`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Upload Analysis Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-review-report
+          path: |
+            analysis-report.json
+            metrics-report.txt
+            recommendations.txt
+
+      - name: Check Quality Gate
+        if: steps.analysis.outputs.status == 'failure'
+        run: |
+          echo "Code quality score is below threshold"
+          echo "Score: ${{ steps.analysis.outputs.score }}"
+          exit 1
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install security tools
+        run: |
+          pip install bandit safety pip-audit
+
+      - name: Run Bandit Security Scan
+        run: |
+          bandit -r . -f json -o bandit-report.json || true
+        continue-on-error: true
+
+      - name: Run Safety Check
+        run: |
+          safety check --json > safety-report.json || true
+        continue-on-error: true
+
+      - name: Run pip-audit
+        run: |
+          pip-audit --format json --output pip-audit-report.json || true
+        continue-on-error: true
+
+      - name: Upload Security Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: |
+            bandit-report.json
+            safety-report.json
+            pip-audit-report.json
