@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Notary Apostille | China Document Services 中国文件认证服务</title>
+    <meta name="description" content="Premier US-China apostille and certified translation coordination services. Serving corporations, law firms, and businesses operating between the United States and China. 美国中国文件认证及翻译协调服务。">
+    <meta name="keywords" content="apostille China, US China documents, certified translation Chinese, document authentication China, 认证, 公证, 翻译, 美国文件中国使用, apostille services Washington DC">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #E8CC6A;
+            --dark: #0a0a0a;
+            --dark-2: #111111;
+            --dark-3: #1a1a1a;
+            --dark-4: #222222;
+            --text: #e8e8e8;
+            --text-muted: #999999;
+            --border: rgba(212, 175, 55, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* ─── HEADER ─── */
+        .header {
+            background: rgba(10, 10, 10, 0.97);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon svg { width: 44px; height: 44px; }
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-main { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; }
+        .logo-sub { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+        .china-badge {
+            background: var(--gold);
+            color: var(--dark);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 2px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-left: 8px;
+        }
+        nav { display: flex; gap: 28px; align-items: center; }
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: var(--gold); }
+        .nav-cta {
+            background: var(--gold);
+            color: var(--dark) !important;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600 !important;
+        }
+        .nav-cta:hover { background: var(--gold-light) !important; color: var(--dark) !important; }
+
+        /* ─── HERO ─── */
+        .hero {
+            background: linear-gradient(135deg, #0a0a0a 0%, #111111 40%, #0d0d0d 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 100px 24px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-flag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .flag-divider { width: 40px; height: 1px; background: var(--border); }
+        .flag-text {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+        .hero h1 span { color: var(--gold); }
+        .hero-subtitle-en {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 12px;
+        }
+        .hero-subtitle-zh {
+            font-size: 1rem;
+            color: var(--gold);
+            opacity: 0.8;
+            max-width: 680px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+        .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--dark);
+        }
+        .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+        .btn-outline {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+        .btn-outline:hover { background: rgba(212,175,55,0.1); }
+        .hero-trust {
+            margin-top: 56px;
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+        .trust-item { text-align: center; }
+        .trust-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .trust-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+        /* ─── ANNOUNCEMENT BANNER ─── */
+        .announcement {
+            background: linear-gradient(90deg, rgba(212,175,55,0.12), rgba(212,175,55,0.06), rgba(212,175,55,0.12));
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 24px;
+            text-align: center;
+        }
+        .announcement-inner { max-width: 900px; margin: 0 auto; }
+        .announcement-label {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 2px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .announcement p {
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .announcement strong { color: var(--gold); }
+
+        /* ─── SECTIONS ─── */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        section { padding: 80px 24px; }
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 48px;
+        }
+
+        /* ─── WHY CNA ─── */
+        .why-section { background: var(--dark-2); }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .why-card {
+            background: var(--dark-3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 32px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .why-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+        .why-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(212,175,55,0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .why-icon svg { width: 24px; height: 24px; stroke: var(--gold); }
+        .why-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #fff; margin-bottom: 8px; }
+        .why-card h3 .zh { font-size: 0.85rem; color: var(--gold); display: block; margin-top: 2px; font-family: 'Inter', sans-serif; font-weight: 400; }
+        .why-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
+
+        /* ─── SERVICES ─── */
+        .services-section { background: var(--dark); }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .service-card {
+            background: var(--dark-3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 36px;
+            position: relative;
+            transition: border-color 0.2s;
+        }
+        .service-card:hover { border-color: var(--gold); }
+        .service-card.featured {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, var(--dark-3), rgba(212,175,55,0.04));
+        }
+        .featured-badge {
+            position: absolute;
+            top: -1px;
+            right: 24px;
+            background: var(--gold);
+            color: var(--dark);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 0 0 6px 6px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .service-card .zh-title {
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 16px;
+            display: block;
+        }
+        .service-card p { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.7; }
+        .service-docs {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        .service-docs li {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+        .service-docs li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 0.7rem;
+        }
+        .price-block {
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+        .price-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .price-note { font-size: 0.75rem; color: var(--text-muted); }
+        .price-cta {
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid var(--gold);
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .price-cta:hover { background: var(--gold); color: var(--dark); }
+
+        /* ─── PROCESS ─── */
+        .process-section { background: var(--dark-2); }
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0;
+            margin-top: 48px;
+            position: relative;
+        }
+        .process-step {
+            text-align: center;
+            padding: 32px 24px;
+            position: relative;
+        }
+        .process-step::after {
+            content: '→';
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+        .process-step:last-child::after { display: none; }
+        .step-num {
+            width: 52px;
+            height: 52px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+        .process-step h4 { font-size: 0.9rem; color: #fff; margin-bottom: 4px; font-weight: 600; }
+        .process-step .zh { font-size: 0.75rem; color: var(--gold); margin-bottom: 8px; display: block; }
+        .process-step p { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* ─── DOCUMENTS ─── */
+        .docs-section { background: var(--dark); }
+        .docs-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .docs-column {
+            background: var(--dark-3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 32px;
+        }
+        .docs-column h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .docs-column .zh { font-size: 0.8rem; color: var(--gold); margin-bottom: 20px; display: block; }
+        .doc-list { list-style: none; }
+        .doc-list li {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .doc-list li:last-child { border-bottom: none; }
+        .doc-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ─── QUOTE FORM ─── */
+        .quote-section { background: var(--dark-2); }
+        .quote-container {
+            max-width: 760px;
+            margin: 48px auto 0;
+            background: var(--dark-3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 48px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-group label .zh { font-size: 0.75rem; color: var(--gold); margin-left: 6px; text-transform: none; letter-spacing: 0; font-weight: 400; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: var(--dark-4);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px 16px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus { border-color: var(--gold); }
+        .form-group select option { background: var(--dark-4); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-submit { margin-top: 28px; text-align: center; }
+        .form-submit .btn { width: 100%; justify-content: center; font-size: 1rem; padding: 16px; }
+        .form-note { font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; text-align: center; }
+
+        /* ─── CONTACT ─── */
+        .contact-section { background: var(--dark); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .contact-card {
+            background: var(--dark-3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 28px;
+            text-align: center;
+        }
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(212,175,55,0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+        .contact-icon svg { width: 22px; height: 22px; stroke: var(--gold); }
+        .contact-card h3 { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .contact-card p { font-size: 0.9rem; color: var(--text); }
+        .contact-card .zh { font-size: 0.8rem; color: var(--gold); margin-top: 4px; display: block; }
+
+        /* ─── FOOTER ─── */
+        .footer {
+            background: var(--dark-2);
+            border-top: 1px solid var(--border);
+            padding: 48px 24px 32px;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        .footer-brand .logo-main { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); display: block; margin-bottom: 4px; }
+        .footer-brand p { font-size: 0.8rem; color: var(--text-muted); }
+        .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+        .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-bottom p { font-size: 0.8rem; color: var(--text-muted); }
+        .footer-bottom .zh { color: var(--gold); opacity: 0.7; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .docs-columns { grid-template-columns: 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+            .process-step::after { display: none; }
+            .hero-trust { gap: 28px; }
+            .quote-container { padding: 28px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="30" r="28" stroke="#D4AF37" stroke-width="2"/>
+                        <path d="M30 10L32 25H45L34 33L38 48L30 40L22 48L26 33L15 25H28L30 10Z" fill="#D4AF37"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">Common Notary</span>
+                    <span class="logo-sub">Apostille Services</span>
+                </div>
+                <span class="china-badge">China 中国</span>
+            </a>
+            <nav>
+                <a href="#services">Services</a>
+                <a href="#process">Process</a>
+                <a href="#documents">Documents</a>
+                <a href="#quote" class="nav-cta">Get Quote 获取报价</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-flag">
+            <div class="flag-divider"></div>
+            <span class="flag-text">US — China Document Services</span>
+            <div class="flag-divider"></div>
+        </div>
+        <h1>Your Premier Partner for<br><span>US-China Document Authentication</span></h1>
+        <p class="hero-subtitle-en">Apostille facilitation and certified translation coordination for corporations, law firms, and businesses operating between the United States and China.</p>
+        <p class="hero-subtitle-zh">为在美中两国之间开展业务的企业、律师事务所和机构提供专业的认证及翻译协调服务。</p>
+        <div class="hero-actions">
+            <a href="#quote" class="btn btn-primary">Request a Quote 获取报价</a>
+            <a href="#services" class="btn btn-outline">View Services 查看服务</a>
+        </div>
+        <div class="hero-trust">
+            <div class="trust-item">
+                <div class="trust-number">Nov 2023</div>
+                <div class="trust-label">China Joined Hague Convention</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-number">90%</div>
+                <div class="trust-label">Faster Processing vs. Old Process</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-number">70%</div>
+                <div class="trust-label">Commercial Docs Now Apostille-Eligible</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-number">1-Stop</div>
+                <div class="trust-label">Apostille + Translation Bundle</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANNOUNCEMENT BANNER -->
+    <div class="announcement">
+        <div class="announcement-inner">
+            <span class="announcement-label">Important Update 重要更新</span>
+            <p>
+                <strong>China joined the Hague Apostille Convention on November 7, 2023.</strong> The Chinese Embassy and Consulates in the US <strong>no longer process document authentication</strong>. All US documents intended for use in China now require an apostille — and CNA is here to handle it seamlessly. 
+                <strong>中国于2023年11月7日加入海牙认证公约。</strong>中国驻美大使馆及领事馆已停止办理文件认证，所有在华使用的美国文件现须办理认证手续。
+            </p>
+        </div>
+    </div>
+
+    <!-- WHY CNA -->
+    <section class="why-section">
+        <div class="container">
+            <div class="section-label">Why Choose CNA</div>
+            <h2 class="section-title">Built for the Upper Tier of Business</h2>
+            <p class="section-subtitle">We do not compete on price. We compete on precision, speed, and accountability — because your cross-border transactions demand nothing less.</p>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                    </div>
+                    <h3>White-Glove Coordination <span class="zh">全程专属服务</span></h3>
+                    <p>A dedicated account manager handles every step — from document intake to final delivery — so your team never has to chase bureaucratic processes.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3>Apostille + Translation Bundle <span class="zh">认证+翻译一站式服务</span></h3>
+                    <p>The only service you need. CNA coordinates both the apostille authentication and certified Mandarin translation under one roof, with one point of contact.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3>Post-2023 Hague Experts <span class="zh">海牙公约专家</span></h3>
+                    <p>China's accession to the Hague Convention changed everything. We are current on every requirement and ensure your documents meet the latest standards for use in China.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15l2 2 4-4"/></svg>
+                    </div>
+                    <h3>Corporate-Grade Security <span class="zh">企业级安全保障</span></h3>
+                    <p>Secure digital archiving, timestamp logs, and chain-of-custody documentation for every document processed — essential for corporate compliance and legal proceedings.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3>Serving Law Firms & Corporations <span class="zh">服务律师事务所与企业</span></h3>
+                    <p>CNA is a professional services firm built for attorneys, law firms, and corporations. Our processes are designed for volume, confidentiality, and precision.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    </div>
+                    <h3>Expedited Processing Available <span class="zh">提供加急处理服务</span></h3>
+                    <p>When a transaction cannot wait, our expedited processing ensures your documents are authenticated and translated on your timeline, not the government's.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-label">Our China Services</div>
+            <h2 class="section-title">Premium Service Packages</h2>
+            <p class="section-subtitle">Structured for corporate clients and legal professionals who require comprehensive, reliable document coordination.</p>
+            <div class="services-grid">
+
+                <div class="service-card featured">
+                    <span class="featured-badge">Most Popular</span>
+                    <h3>Corporate Executive Bundle</h3>
+                    <span class="zh-title">企业高管套餐</span>
+                    <p>The complete solution for corporations establishing Chinese subsidiaries, executing cross-border M&A, or managing ongoing US-China business operations.</p>
+                    <ul class="service-docs">
+                        <li>Expedited Federal or State Apostille</li>
+                        <li>Certified Mandarin Translation (coordinated)</li>
+                        <li>Dedicated Account Manager</li>
+                        <li>Secure Digital Archiving + Timestamp Log</li>
+                        <li>Overnight Secure Courier Delivery</li>
+                        <li>Priority Processing Status</li>
+                    </ul>
+                    <div class="price-block">
+                        <div>
+                            <div class="price-amount">$895</div>
+                            <div class="price-note">per document package</div>
+                        </div>
+                        <a href="#quote" class="price-cta">Get Started</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <h3>Legal & Compliance Bundle</h3>
+                    <span class="zh-title">法律合规套餐</span>
+                    <p>Designed for immigration attorneys, IP law firms, and corporate compliance officers managing document authentication for Chinese clients or China-facing matters.</p>
+                    <ul class="service-docs">
+                        <li>Standard Apostille Processing</li>
+                        <li>Certified Mandarin Translation (coordinated)</li>
+                        <li>Digital + Physical Document Copies</li>
+                        <li>Priority Domestic Shipping</li>
+                        <li>Case Reference Number & Tracking</li>
+                    </ul>
+                    <div class="price-block">
+                        <div>
+                            <div class="price-amount">$595</div>
+                            <div class="price-note">per document package</div>
+                        </div>
+                        <a href="#quote" class="price-cta">Get Started</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <h3>A La Carte Services</h3>
+                    <span class="zh-title">单项服务</span>
+                    <p>For clients requiring specific services without a full bundle. All a la carte services are delivered with the same CNA standard of care and documentation.</p>
+                    <ul class="service-docs">
+                        <li>Expedited China Apostille — from $395</li>
+                        <li>Certified Mandarin Translation — from $150</li>
+                        <li>Federal Apostille (US Dept. of State) — $497</li>
+                        <li>Corporate Document Retrieval — $250</li>
+                        <li>Secure Archive (Annual) — $99/year</li>
+                    </ul>
+                    <div class="price-block">
+                        <div>
+                            <div class="price-amount">From $150</div>
+                            <div class="price-note">per service</div>
+                        </div>
+                        <a href="#quote" class="price-cta">Get Quote</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process" class="process-section">
+        <div class="container">
+            <div class="section-label">How It Works</div>
+            <h2 class="section-title">Simple. Seamless. Professional.</h2>
+            <p class="section-subtitle">From intake to delivery, CNA manages the entire authentication and translation workflow on your behalf.</p>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-num">1</div>
+                    <h4>Submit Request</h4>
+                    <span class="zh">提交申请</span>
+                    <p>Complete the quote form with your document type, destination, and timeline requirements.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">2</div>
+                    <h4>Document Review</h4>
+                    <span class="zh">文件审核</span>
+                    <p>Our team reviews your documents and confirms the exact apostille and translation requirements for China.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">3</div>
+                    <h4>Authentication</h4>
+                    <span class="zh">认证处理</span>
+                    <p>We coordinate apostille processing through the appropriate state or federal authority on your behalf.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">4</div>
+                    <h4>Translation</h4>
+                    <span class="zh">翻译协调</span>
+                    <p>Certified Mandarin translation is coordinated through our vetted translation partners and delivered under the CNA brand.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">5</div>
+                    <h4>Delivery</h4>
+                    <span class="zh">文件交付</span>
+                    <p>Authenticated and translated documents are delivered securely, digitally and/or physically, per your specifications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOCUMENTS -->
+    <section id="documents" class="docs-section">
+        <div class="container">
+            <div class="section-label">Document Types</div>
+            <h2 class="section-title">Documents We Handle for China</h2>
+            <p class="section-subtitle">Whether you are expanding a business into China or managing cross-border legal matters, CNA coordinates authentication and translation for all major document categories.</p>
+            <div class="docs-columns">
+                <div class="docs-column">
+                    <h3>Corporate & Business Documents</h3>
+                    <span class="zh">企业及商业文件</span>
+                    <ul class="doc-list">
+                        <li>Certificate of Incorporation / Articles of Organization</li>
+                        <li>Corporate Power of Attorney</li>
+                        <li>Board Resolutions</li>
+                        <li>Business Agreements & Contracts</li>
+                        <li>Commercial Invoices & Trade Documents</li>
+                        <li>Good Standing Certificates</li>
+                        <li>Shareholder Agreements</li>
+                        <li>Audited Financial Statements</li>
+                    </ul>
+                </div>
+                <div class="docs-column">
+                    <h3>Legal & Personal Documents</h3>
+                    <span class="zh">法律及个人文件</span>
+                    <ul class="doc-list">
+                        <li>FBI Background Check Certificates</li>
+                        <li>Birth, Marriage & Death Certificates</li>
+                        <li>Court Documents & Judgments</li>
+                        <li>Diplomas, Transcripts & Degree Certificates</li>
+                        <li>Notarized Affidavits & Declarations</li>
+                        <li>Power of Attorney Documents</li>
+                        <li>Immigration & Visa Support Documents</li>
+                        <li>Wills, Trusts & Estate Documents</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUOTE FORM -->
+    <section id="quote" class="quote-section">
+        <div class="container">
+            <div style="text-align:center;">
+                <div class="section-label">Request a Quote</div>
+                <h2 class="section-title">Start Your China Document Request</h2>
+                <p class="section-subtitle" style="margin:0 auto 0;">Complete the form below and a CNA specialist will respond within one business day. 请填写以下表格，我们的专员将在一个工作日内与您联系。</p>
+            </div>
+            <div class="quote-container">
+                <form id="chinaForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>First Name <span class="zh">名</span></label>
+                            <input type="text" placeholder="First name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name <span class="zh">姓</span></label>
+                            <input type="text" placeholder="Last name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Company / Organization <span class="zh">公司/机构</span></label>
+                            <input type="text" placeholder="Your company or law firm">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address <span class="zh">电子邮件</span></label>
+                            <input type="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number <span class="zh">电话</span></label>
+                            <input type="tel" placeholder="(555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label>Service Needed <span class="zh">所需服务</span></label>
+                            <select required>
+                                <option value="">Select a service...</option>
+                                <option value="bundle_exec">Corporate Executive Bundle — $895</option>
+                                <option value="bundle_legal">Legal & Compliance Bundle — $595</option>
+                                <option value="apostille_only">Apostille Only — from $395</option>
+                                <option value="translation_only">Certified Translation Only — from $150</option>
+                                <option value="federal">Federal Apostille (US Dept. of State) — $497</option>
+                                <option value="custom">Custom / Multiple Documents</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label>Document Type(s) <span class="zh">文件类型</span></label>
+                            <input type="text" placeholder="e.g., Certificate of Incorporation, Power of Attorney, FBI Background Check">
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Documents <span class="zh">文件数量</span></label>
+                            <select>
+                                <option value="1">1 document</option>
+                                <option value="2-5">2–5 documents</option>
+                                <option value="6-10">6–10 documents</option>
+                                <option value="10+">10+ documents</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Timeline <span class="zh">时间要求</span></label>
+                            <select>
+                                <option value="standard">Standard (5–10 business days)</option>
+                                <option value="expedited">Expedited (2–3 business days)</option>
+                                <option value="rush">Rush (Next business day)</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label>Additional Notes <span class="zh">备注</span></label>
+                            <textarea placeholder="Please describe your specific requirements, destination in China, or any special instructions..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary">Submit Request 提交申请</button>
+                        <p class="form-note">We will respond within 1 business day. All information is kept strictly confidential. 我们将在一个工作日内回复。所有信息严格保密。</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-label">Contact Us</div>
+            <h2 class="section-title">Reach Our China Services Team</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </div>
+                    <h3>Phone</h3>
+                    <p>(555) 123-4567</p>
+                    <span class="zh">电话</span>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <h3>Email</h3>
+                    <p>china@commonnotary.com</p>
+                    <span class="zh">电子邮件</span>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h3>Business Hours</h3>
+                    <p>Mon–Fri: 9AM – 6PM<br>Sat: 10AM – 2PM</p>
+                    <span class="zh">营业时间（美东时间）</span>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <h3>Service Area</h3>
+                    <p>Washington D.C., Virginia,<br>Maryland & Nationwide</p>
+                    <span class="zh">服务区域</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="logo-main">Common Notary Apostille</span>
+                <p>Professional document authentication & translation coordination</p>
+                <p style="margin-top:4px; color: #D4AF37; font-size:0.75rem; opacity:0.8;">专业文件认证及翻译协调服务</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="#services">China Services</a>
+                <a href="#documents">Documents</a>
+                <a href="#process">Process</a>
+                <a href="#quote">Get Quote</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Common Notary Apostille. All rights reserved.</p>
+            <p class="zh">版权所有 © 2026 Common Notary Apostille</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('chinaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            btn.textContent = 'Request Submitted! 申请已提交';
+            btn.style.background = '#2a6b3a';
+            btn.disabled = true;
+        });
+    </script>
+
+</body>
+</html>
