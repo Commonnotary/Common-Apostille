@@ -9,29 +9,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #D4AF37;
+            --gold: #C9A84C;
             --gold-light: #E8CC6A;
-            --dark: #0a0a0a;
-            --dark-2: #111111;
-            --dark-3: #1a1a1a;
-            --dark-4: #222222;
+            --navy: #1B2A4A;
+            --navy-dark: #12203A;
+            --navy-deeper: #0D1829;
+            --dark: #0D1829;
+            --dark-2: #12203A;
+            --dark-3: #1B2A4A;
+            --dark-4: #243558;
             --text: #e8e8e8;
-            --text-muted: #999999;
-            --border: rgba(212, 175, 55, 0.2);
+            --text-muted: #9aabcc;
+            --border: rgba(201, 168, 76, 0.25);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--dark);
+            background: var(--navy-deeper);
             color: var(--text);
             line-height: 1.7;
         }
 
         /* ─── HEADER ─── */
         .header {
-            background: rgba(10, 10, 10, 0.97);
+            background: rgba(13, 24, 41, 0.97);
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
@@ -48,7 +51,7 @@
             height: 72px;
         }
         .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .logo-icon svg { width: 44px; height: 44px; }
+        .logo-icon img { height: 48px; width: auto; }
         .logo-text { display: flex; flex-direction: column; }
         .logo-main { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; }
         .logo-sub { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
@@ -564,14 +567,7 @@
         <div class="container">
             <a href="index.html" class="logo">
                 <div class="logo-icon">
-                    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="30" cy="30" r="28" stroke="#D4AF37" stroke-width="2"/>
-                        <path d="M30 10L32 25H45L34 33L38 48L30 40L22 48L26 33L15 25H28L30 10Z" fill="#D4AF37"/>
-                    </svg>
-                </div>
-                <div class="logo-text">
-                    <span class="logo-main">Common Notary</span>
-                    <span class="logo-sub">Apostille Services</span>
+                    <img src="assets/cna-logo.jpeg" alt="CNA — Common Notary Apostille | Precision Legal Infrastructure" />
                 </div>
                 <span class="china-badge">China 中国</span>
             </a>
@@ -925,7 +921,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                     </div>
                     <h3>Phone</h3>
-                    <p>(555) 123-4567</p>
+                    <p><a href="tel:+12028037203" style="color:var(--gold);text-decoration:none;">(202) 803-7203</a></p>
                     <span class="zh">电话</span>
                 </div>
                 <div class="contact-card">
@@ -933,7 +929,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     </div>
                     <h3>Email</h3>
-                    <p>china@commonnotary.com</p>
+                    <p><a href="mailto:admin@commonapostille.com" style="color:var(--gold);text-decoration:none;">admin@commonapostille.com</a></p>
                     <span class="zh">电子邮件</span>
                 </div>
                 <div class="contact-card">
@@ -960,9 +956,12 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <span class="logo-main">Common Notary Apostille</span>
-                <p>Professional document authentication & translation coordination</p>
-                <p style="margin-top:4px; color: #D4AF37; font-size:0.75rem; opacity:0.8;">专业文件认证及翻译协调服务</p>
+                <img src="assets/cna-logo.jpeg" alt="CNA Common Notary Apostille" style="height:52px;width:auto;margin-bottom:10px;" />
+                <p style="font-size:0.8rem;color:var(--text-muted);">Byron L. Hamlar, CEO &mdash; Common Notary Apostille</p>
+                <p style="font-size:0.8rem;color:var(--text-muted);">Washington DC | Maryland | Virginia | Global</p>
+                <p style="margin-top:6px; color: var(--gold); font-size:0.75rem; opacity:0.85;">专业文件认证及翻译协调服务</p>
+                <p style="margin-top:6px;"><a href="tel:+12028037203" style="color:var(--gold);font-size:0.85rem;text-decoration:none;">(202) 803-7203</a> &nbsp;|&nbsp; <a href="mailto:admin@commonapostille.com" style="color:var(--gold);font-size:0.85rem;text-decoration:none;">admin@commonapostille.com</a></p>
+                <p style="margin-top:4px;"><a href="https://commonapostille.com" style="color:var(--gold);font-size:0.85rem;text-decoration:none;">commonapostille.com</a></p>
             </div>
             <div class="footer-links">
                 <a href="index.html">Home</a>
@@ -974,8 +973,8 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Common Notary Apostille. All rights reserved.</p>
-            <p class="zh">版权所有 © 2026 Common Notary Apostille</p>
+            <p>&copy; 2026 Common Notary Apostille &mdash; Precision Legal Infrastructure. All rights reserved.</p>
+            <p class="zh">版权所有 © 2026 Common Notary Apostille &mdash; 精准法律基础设施</p>
         </div>
     </footer>
 
