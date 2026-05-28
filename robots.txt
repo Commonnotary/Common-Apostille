@@ -1,0 +1,56 @@
+# robots.txt for Common Notary Apostille
+# https://commonnotaryapostille.com
+
+# Allow all standard search engine crawlers
+User-agent: *
+Allow: /
+
+# Explicitly allow Google AI crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Explicitly allow OpenAI / ChatGPT crawler
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Explicitly allow Anthropic / Claude crawler
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Explicitly allow Perplexity AI crawler
+User-agent: PerplexityBot
+Allow: /
+
+# Explicitly allow Microsoft / Bing / Copilot crawlers
+User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# Explicitly allow Meta AI crawler
+User-agent: FacebookBot
+Allow: /
+
+# Explicitly allow Apple AI crawler
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Explicitly allow Common Crawl (used by many AI training datasets)
+User-agent: CCBot
+Allow: /
+
+# Sitemap location
+Sitemap: https://commonnotaryapostille.com/sitemap.xml

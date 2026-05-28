@@ -1,0 +1,227 @@
+/* ============================================================
+   GEO Enhancement Styles — Common Notary Apostille
+   Supplemental styles for new service pages, FAQ, and
+   structured content sections.
+   ============================================================ */
+
+/* Breadcrumb Navigation */
+.breadcrumb-nav {
+    background: #f8f6f0;
+    border-bottom: 1px solid #e8e0d0;
+    padding: 0.75rem 0;
+    font-size: 0.875rem;
+}
+
+.breadcrumb {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.breadcrumb li {
+    display: flex;
+    align-items: center;
+    color: #666;
+}
+
+.breadcrumb li + li::before {
+    content: "›";
+    margin-right: 0.5rem;
+    color: #999;
+}
+
+.breadcrumb a {
+    color: #8B7355;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Inner Hero (for sub-pages) */
+.hero-inner {
+    padding: 3rem 0 2.5rem;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.hero-inner h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Content Section */
+.content-section {
+    padding: 3rem 0;
+    background: #fff;
+}
+
+.content-body {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.content-body h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: #1a1a2e;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #D4AF37;
+}
+
+.content-body h2:first-child {
+    margin-top: 0;
+}
+
+.content-body p {
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+/* Feature List */
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 1.5rem;
+}
+
+.feature-list li {
+    padding: 0.6rem 0 0.6rem 1.5rem;
+    position: relative;
+    color: #444;
+    line-height: 1.7;
+    border-bottom: 1px solid #f0ece4;
+}
+
+.feature-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #D4AF37;
+    font-weight: bold;
+}
+
+/* Info Table */
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+}
+
+.info-table th {
+    background: #1a1a2e;
+    color: #D4AF37;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.info-table td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid #e8e0d0;
+    color: #444;
+    vertical-align: top;
+}
+
+.info-table tr:nth-child(even) td {
+    background: #f8f6f0;
+}
+
+.info-table tr:hover td {
+    background: #f0ece4;
+}
+
+/* FAQ Block */
+.faq-block {
+    margin: 1.5rem 0;
+}
+
+.faq-item {
+    border: 1px solid #e8e0d0;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    background: #fdfcf9;
+    transition: box-shadow 0.2s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 2px 12px rgba(212, 175, 55, 0.15);
+}
+
+.faq-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: #1a1a2e;
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+}
+
+.faq-item p {
+    margin: 0;
+    color: #555;
+    line-height: 1.75;
+    font-size: 0.95rem;
+}
+
+.faq-item a {
+    color: #8B7355;
+    text-decoration: none;
+}
+
+.faq-item a:hover {
+    text-decoration: underline;
+}
+
+/* CTA Block */
+.cta-block {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin: 3rem 0 1rem;
+    text-align: center;
+    color: #fff;
+}
+
+.cta-block h2 {
+    color: #D4AF37;
+    border-bottom: none;
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.cta-block p {
+    color: #c8c8d8;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-inner h1 {
+        font-size: 1.5rem;
+    }
+
+    .info-table {
+        font-size: 0.85rem;
+    }
+
+    .info-table th,
+    .info-table td {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .cta-block {
+        padding: 1.5rem;
+    }
+
+    .content-body h2 {
+        font-size: 1.35rem;
+    }
+}
